@@ -16,7 +16,7 @@ public class StudentList extends ArrayList<Student> {
     MoutainList ml = new MoutainList();
 
     public void addStudent() {
-         ml.readFile("MountainList.csv");
+        ml.readFile("MountainList.csv");
         Scanner sc = new Scanner(System.in);
         String studentId = null, name = null, phoneNumber = null, email;
         int mountainCode;
@@ -96,7 +96,7 @@ public class StudentList extends ArrayList<Student> {
         }
 
         double tuition = calculateTuitionFee(phoneNumber);
-        
+
         System.out.println("Student added successfully!");
 
         this.add(new Student(studentId, name, phoneNumber, email, mountainCode, tuition));
@@ -257,7 +257,7 @@ public class StudentList extends ArrayList<Student> {
         System.out.println("-------------------------------------------------------------");
 
         for (Student s : this) {
-            System.out.printf("%-10s | %-15s | %-10s | %-8s | %,10f%n",
+            System.out.printf("%-10s | %-15s | %-10s | %-8s | %,10.2f%n",
                     s.getStudentId(),
                     s.getName(),
                     s.getPhoneNumber(),
@@ -273,26 +273,24 @@ public class StudentList extends ArrayList<Student> {
             Student s = this.get(i);
 
             if (s.getStudentId().equalsIgnoreCase(studentId)) {
-                if (s.getStudentId().equalsIgnoreCase(studentId)) {
-                    // Print formatted student details
-                    System.out.println("Student Details:");
-                    System.out.println("--------------------------------------------------");
-                    System.out.printf("Student ID : %s%n", s.getStudentId());
-                    System.out.printf("Name       : %s%n", s.getName());
-                    System.out.printf("Phone      : %s%n", s.getPhoneNumber());
-                    System.out.printf("Mountain   : MT%02d%n", s.getMountianCode());
-                    System.out.printf("Fee        : %,d%n", (long) s.getTuitionFee());
-                    System.out.println("--------------------------------------------------");
 
-                    System.out.println("Are you sure you want to delete this registration? (Y/N):");
-                    String choice = sc.nextLine().toLowerCase();
-                    if (choice.equals("y")) {
-                        this.remove(i);
-                        System.out.println("The registration has been successfully deleted.");
-                        return;
-                    } else if (choice.equals("n")) {
-                        return;
-                    }
+                System.out.println("Student Details:");
+                System.out.println("--------------------------------------------------");
+                System.out.printf("Student ID : %s%n", s.getStudentId());
+                System.out.printf("Name       : %s%n", s.getName());
+                System.out.printf("Phone      : %s%n", s.getPhoneNumber());
+                System.out.printf("Mountain   : MT%02d%n", s.getMountianCode());
+                System.out.printf("Fee        : %,d%n", (long) s.getTuitionFee());
+                System.out.println("--------------------------------------------------");
+
+                System.out.println("Are you sure you want to delete this registration? (Y/N):");
+                String choice = sc.nextLine().toLowerCase();
+                if (choice.equals("y")) {
+                    this.remove(i);
+                    System.out.println("The registration has been successfully deleted.");
+                    return;
+                } else if (choice.equals("n")) {
+                    return;
                 }
             }
             System.out.println("This student has not registered yet");

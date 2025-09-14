@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="mountain-hiking">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/dist/mountain-hiking.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
