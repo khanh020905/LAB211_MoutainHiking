@@ -12,16 +12,16 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         MoutainList ml = new MoutainList();
-        
+
         ml.readFile("MountainList.csv");
-        
+
         while (true) {
             showMenu();
 
             System.out.println("Enter choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
-            
+
             switch (choice) {
                 case 1:
                     sl.addStudent();
@@ -34,22 +34,35 @@ public class Main {
                     hasUnsavedChange = true;
                     break;
                 case 3:
+                    sl.displayStudent();
+                    break;
+                case 4:
                     System.out.println("Enter student ID to delete: ");
                     String studentIdDelete = sc.nextLine();
                     sl.deleteRegister(studentIdDelete);
                     hasUnsavedChange = true;
                     break;
-                case 4:
+                case 5:
                     System.out.println("Enter Student or Part of student name to search: ");
                     String studentName = sc.nextLine();
                     sl.searchByName(studentName);
                     hasUnsavedChange = true;
                     break;
-                case 5:
+                case 6:
+                    sl.filterDataByCampus();
+                    hasUnsavedChange = true;
+                    break;
+                case 7:
+                    sl.statisticByLocation();
+                    hasUnsavedChange = true;
+                    break;
+                case 8:
                     sl.saveFile();
                     hasUnsavedChange = false;
                     break;
-                case 9: exitProgram(); break;
+                case 9:
+                    exitProgram();
+                    break;
 
                 default:
                     System.out.println("This function is not available.");
@@ -58,14 +71,17 @@ public class Main {
     }
 
     public static void showMenu() {
-        System.out.println("\n===== MAIN MENU =====");
-        System.out.println("1. Add Student");
-        System.out.println("2. Update Student");
-        System.out.println("3. Delete Student");
-        System.out.println("4. Search Student by Name");
-        System.out.println("5. Save Data");
-        System.out.println("9. Exit");
-        System.out.println("=====================");
+        System.out.println("========= STUDENT REGISTRATION MENU =========");
+        System.out.println("1. New Registration.");
+        System.out.println("2. Update Registration Information.");
+        System.out.println("3. Display Registered List.");
+        System.out.println("4. Delete Registration Information.");
+        System.out.println("5. Search Participants by Name.");
+        System.out.println("6. Filter Data by Campus.");
+        System.out.println("7. Statistics of Registration Numbers by Location.");
+        System.out.println("8. Save Data to File.");
+        System.out.println("9. Exit the Program.");
+        System.out.println("=============================================");
     }
 
     public static void exitProgram() {

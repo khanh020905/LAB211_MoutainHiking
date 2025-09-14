@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Moutain;
-import Models.Student;
+import Model.Student;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -16,15 +16,24 @@ public class StudentList extends ArrayList<Student> {
     MoutainList ml = new MoutainList();
 
     public void addStudent() {
+         ml.readFile("MountainList.csv");
         Scanner sc = new Scanner(System.in);
         String studentId = null, name = null, phoneNumber = null, email;
         int mountainCode;
 
         System.out.println("Enter student ID: ");
 
-        do {
-            studentId = sc.nextLine().trim();
-        } while (checkStudentId(studentId) == true);
+        while (true) {
+            studentId = sc.nextLine();
+
+            if (!studentId.matches("(SE|HE|DE|QE|CE)\\d{6}")) {
+                System.out.println("Wrong student ID format. Try again!");
+            } else if (!checkStudentId(studentId)) {
+                System.out.println("Student ID already exists. Enter another!");
+            } else {
+                break;
+            }
+        }
 
         System.out.println("Enter student name: ");
 
@@ -87,6 +96,8 @@ public class StudentList extends ArrayList<Student> {
         }
 
         double tuition = calculateTuitionFee(phoneNumber);
+        
+        System.out.println("Student added successfully!");
 
         this.add(new Student(studentId, name, phoneNumber, email, mountainCode, tuition));
 
@@ -94,10 +105,17 @@ public class StudentList extends ArrayList<Student> {
 
     public boolean checkStudentId(String studentId) {
         for (Student s : this) {
-            if (s.getStudentId().matches("(SE|HE|DE|QE|CE)\\d{6}") && !s.getStudentId().equalsIgnoreCase(studentId)) {
+            if (!s.getStudentId().matches("(SE|HE|DE|QE|CE)\\d{6}")) {
                 return false;
             }
         }
+
+        for (Student s : this) {
+            if (s.getStudentId().equalsIgnoreCase(studentId)) {
+                return true;
+            }
+        }
+
         return true;
     }
 
@@ -413,7 +431,7 @@ public class StudentList extends ArrayList<Student> {
     public void saveFile() {
         String fileName = "registrations.dat";
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
-            
+
             oos.writeObject(new ArrayList<>(this));
             System.out.println("Registration data has been successfully saved to " + fileName);
         } catch (IOException e) {
