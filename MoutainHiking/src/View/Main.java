@@ -87,7 +87,7 @@ public class Main {
     public static void exitProgram() {
         Scanner sc = new Scanner(System.in);
 
-        if (hasUnsavedChange) {
+        if (hasUnsavedChange == false) {
             System.out.println("You have unsaved changes. Do you want to save before exiting? (Y/N)");
             String choice = sc.nextLine().toUpperCase();
 

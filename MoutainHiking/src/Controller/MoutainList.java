@@ -12,12 +12,12 @@ public class MoutainList extends ArrayList<Moutain> {
             File file = new File(fileName);
             Scanner sc = new Scanner(file);
 
+            if (sc.hasNextLine()) {
+                sc.nextLine();
+            }
+
             while (sc.hasNextLine()) {
                 String[] list = sc.nextLine().split(",");
-
-                if (list.length < 4) {
-                    continue;
-                }
 
                 Moutain moutain = new Moutain(Integer.parseInt(list[0].trim()), list[1].trim(), list[2].trim(), list[3].trim());
 
